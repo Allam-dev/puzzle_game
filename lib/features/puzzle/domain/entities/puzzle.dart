@@ -2,8 +2,8 @@ class Puzzle {
   final int id;
   final int rows;
   final int columns;
-  int steps = 0;
-  int timeBySec = 0;
+  int steps;
+  int timeBySec;
   final int size;
   bool isOpen;
   List<int> list = [];
@@ -12,6 +12,8 @@ class Puzzle {
       {required this.id,
       required this.rows,
       required this.columns,
+      this.steps = 0,
+      this.timeBySec = 0,
       this.isOpen = false})
       : size = rows * columns ;
 
@@ -19,6 +21,8 @@ class Puzzle {
       {required this.id,
       required this.rows,
       required this.columns,
+      this.steps = 0,
+      this.timeBySec = 0,
       this.isOpen = false})
       : size = rows * columns {
     for (int i = 0; i < size; i++) {

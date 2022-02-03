@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hack_puzzle/core/helpers/database/database_helper.dart';
 import 'package:hack_puzzle/core/usecases/no_params.dart';
 import 'package:hack_puzzle/features/puzzle/data/data_sources/local/puzzle_database_source.dart';
 import 'package:hack_puzzle/features/puzzle/data/repositories/puzzle_reposetory_impl.dart';
@@ -66,23 +67,43 @@ class _MyHomePageState extends State<MyHomePage> {
     //   // called again, and so nothing would appear to happen.
     //   _counter++;
     // });
-  UpdatePuzzle updatePuzzle = UpdatePuzzle(repository: PuzzleReposetoryImpl(localDataSource: PuzzleDatabseSource()));
-  // final uu = updatePuzzle(Puzzle());
+    UpdatePuzzle updatePuzzle = UpdatePuzzle(
+        repository:
+            PuzzleReposetoryImpl(localDataSource: PuzzleDatabseSource()));
+    // final uu = updatePuzzle(Puzzle());
+    late Puzzle puzzle;
+    GetAllPuzzles getAllPuzzles = GetAllPuzzles(
+        repository:
+            PuzzleReposetoryImpl(localDataSource: PuzzleDatabseSource()));
 
-    GetAllPuzzles getAllPuzzles = GetAllPuzzles(repository: PuzzleReposetoryImpl(localDataSource: PuzzleDatabseSource()));
-    final opp = await getAllPuzzles(const NoParams());
-    opp.fold((l) => null, (r) async {
-      print("before ${r[1].steps}");
-      // r[1].steps = 0;
+          
+    ///////////////////////////
+    final getAllPuzzles1 = await getAllPuzzles(const NoParams());
+    getAllPuzzles1.fold(
+        (l) => null,
+        (r) {
+          print("before : ${r[2].steps}");
+          puzzle =
+            Puzzle(columns: r[2].columns, id: r[2].id, rows: r[2].rows);
+        });
+    //////////////////////////////
+    puzzle.steps = 50;
+    //////////////////////////////
+    await updatePuzzle(UpdatePuzzleParams(puzzle: puzzle));
+    /////////////////////////////////////
+    
+    final getAllPuzzles3 = await getAllPuzzles(const NoParams());
+    getAllPuzzles3.fold((l) => null, (r2) => print("after : ${r2[2].steps}"));
 
-      await updatePuzzle(r[1]);
-      print("before ${r[1].isOpen}");
-    });
+    // DatabaseHelper.database.then((db) {
+    //   db.query("hack_puzzles").then((value) {
+    //     print(value[2]["steps"]);
+    //   });
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

@@ -31,6 +31,8 @@ dependencies:
   dartz: ^0.10.1
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.0.1
+  logger: ^1.1.0
   path: ^1.8.0
   provider: ^6.0.2
   sqflite: ^2.0.2

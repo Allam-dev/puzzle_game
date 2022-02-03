@@ -26,15 +26,10 @@ class PuzzleReposetoryImpl implements PuzzleRepository {
         id: puzzle.id,
         columns: puzzle.columns,
         rows: puzzle.rows,
+        steps: puzzle.steps,
+        timeBySec: puzzle.timeBySec,
         isOpen: puzzle.isOpen);
-    bool isTabelExisting = await localDataSource.isPuzzlesTabelExisting();
-    if (isTabelExisting == true) {
-      return Right(await localDataSource.updatePuzzle(
+    return Right(await localDataSource.updatePuzzle(
           id: puzzle.id, values: puzzleModel.toJson));
-    } else {
-      await localDataSource.createPuzzleTable();
-      return Right(await localDataSource.updatePuzzle(
-          id: puzzle.id, values: puzzleModel.toJson));
-    }
   }
 }

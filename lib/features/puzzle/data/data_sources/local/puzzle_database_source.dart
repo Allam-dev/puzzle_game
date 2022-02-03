@@ -1,4 +1,5 @@
 import 'package:hack_puzzle/core/helpers/database/database_helper.dart';
+import 'package:hack_puzzle/core/helpers/debugging/log.dart';
 import 'package:hack_puzzle/features/puzzle/data/data_sources/local/puzzle_local_data_source.dart';
 import 'package:hack_puzzle/features/puzzle/data/models/puzzle_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -50,6 +51,8 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
   @override
   Future<void> updatePuzzle({required Map<String, Object?> values, required int id}) async {
     Database database = await DatabaseHelper.database;
-    await database.update(_tableName, values,where: "id = ?",whereArgs: [id]);
+    Log.debug("$values");
+    int x = await database.update(_tableName, values,where: "id = ?",whereArgs: [id]);
+    Log.information(x);
   }
 }

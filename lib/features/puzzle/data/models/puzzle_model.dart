@@ -5,15 +5,31 @@ class PuzzleModel extends Puzzle {
       {required int id,
       required int rows,
       required int columns,
+      int steps = 0,
+      int timeBySec = 0,
       bool isOpen = false})
-      : super(id: id, rows: rows, columns: columns, isOpen: isOpen);
+      : super(
+            id: id,
+            rows: rows,
+            columns: columns,
+            isOpen: isOpen,
+            steps: steps,
+            timeBySec: timeBySec);
 
   PuzzleModel.withList(
       {required int id,
       required int rows,
       required int columns,
+      int steps = 0,
+      int timeBySec = 0,
       bool isOpen = false})
-      : super.withList(id: id, rows: rows, columns: columns, isOpen: isOpen);
+      : super.withList(
+            id: id,
+            rows: rows,
+            columns: columns,
+            isOpen: isOpen,
+            steps: steps,
+            timeBySec: timeBySec);
 
   factory PuzzleModel.fromJson(Map<String, dynamic> data) {
     return PuzzleModel(
@@ -21,6 +37,8 @@ class PuzzleModel extends Puzzle {
       columns: data["columns"],
       id: data["id"],
       rows: data["rows"],
+      steps: data["steps"],
+      timeBySec: data["time_by_sec"],
     );
   }
 
@@ -30,6 +48,8 @@ class PuzzleModel extends Puzzle {
       columns: data["columns"],
       id: data["id"],
       rows: data["rows"],
+      steps: data["steps"],
+      timeBySec: data["time_by_sec"],
     );
   }
 

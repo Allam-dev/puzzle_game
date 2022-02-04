@@ -1,4 +1,4 @@
-import 'package:hack_puzzle/core/error/failures/failure.dart';
+import 'package:hack_puzzle/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hack_puzzle/core/usecases/future_usecase.dart';
 import 'package:hack_puzzle/core/usecases/no_params.dart';

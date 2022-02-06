@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hack_puzzle/presentation/app_blocs.dart';
 import 'package:hack_puzzle/presentation/navigation/app_router.dart';
+import 'package:hack_puzzle/presentation/screens/all_puzzles/ui/all_puzzles_screen.dart';
 
 void main() {
   runApp(const App());
@@ -15,12 +17,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Puzzle Game',
-      navigatorKey: _navigatorKey,
-      scaffoldMessengerKey: _scaffoldMessengerKey,
-      initialRoute: "",
-      routes: AppRouter.routes,
+    return AppBlocs(
+      child: MaterialApp(
+        title: 'Puzzle Game',
+        navigatorKey: _navigatorKey,
+        scaffoldMessengerKey: _scaffoldMessengerKey,
+        initialRoute: const AllPuzzlesScreen().route,
+        routes: AppRouter.routes,
+      ),
     );
   }
 

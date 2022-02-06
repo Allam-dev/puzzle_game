@@ -16,34 +16,8 @@ class PuzzleModel extends Puzzle {
             steps: steps,
             timeBySec: timeBySec);
 
-  PuzzleModel.withList(
-      {required int id,
-      required int rows,
-      required int columns,
-      int steps = 0,
-      int timeBySec = 0,
-      bool isOpen = false})
-      : super.withList(
-            id: id,
-            rows: rows,
-            columns: columns,
-            isOpen: isOpen,
-            steps: steps,
-            timeBySec: timeBySec);
-
   factory PuzzleModel.fromJson(Map<String, dynamic> data) {
     return PuzzleModel(
-      isOpen: data["is_open"] == 1 ? true : false,
-      columns: data["columns"],
-      id: data["id"],
-      rows: data["rows"],
-      steps: data["steps"],
-      timeBySec: data["time_by_sec"],
-    );
-  }
-
-  factory PuzzleModel.fromJsonWithList(Map<String, dynamic> data) {
-    return PuzzleModel.withList(
       isOpen: data["is_open"] == 1 ? true : false,
       columns: data["columns"],
       id: data["id"],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
 import 'package:hack_puzzle/features/puzzle/domain/entities/puzzle.dart';
 import 'package:hack_puzzle/presentation/navigation/app_navigator.dart';
 import 'package:hack_puzzle/presentation/screens/game/cubit/game_cubit.dart';
@@ -48,14 +49,14 @@ class _ClosePuzzleWidget extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         BlocProvider.of<GameCubit>(context).puzzle = puzzle;
-        AppNavigator.push(routeName: GameScreen().route);
+        AppNavigator.push(routeName: const GameScreen().route);
       },
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Container(
             height: constraints.maxWidth / 1.5,
             decoration: BoxDecoration(
-                color: Color(0xffdbdbdb),
+                color: AppColors.gray,
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -63,15 +64,14 @@ class _ClosePuzzleWidget extends StatelessWidget {
                 Text(
                   "${puzzle.rows} x ${puzzle.columns}",
                   style: const TextStyle(
-                // color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text("Level : ${puzzle.id}",style: TextStyle(
+                Text("Level : ${puzzle.id}",style: const TextStyle(
                   fontSize: 20,
                 ),),
-                Text("time : ${puzzle.timeBySec} sec",style: TextStyle(
+                Text("time : ${puzzle.timeBySec} sec",style: const TextStyle(
                   fontSize: 20,
                 ),)
               ],

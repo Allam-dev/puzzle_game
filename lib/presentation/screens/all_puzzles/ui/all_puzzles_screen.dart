@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
 import 'package:hack_puzzle/presentation/screens/all_puzzles/cubit/all_puzzles_cubit.dart';
 import 'package:hack_puzzle/presentation/screens/all_puzzles/ui/widgets/puzzles_widget.dart';
 import 'package:hack_puzzle/presentation/screens/screen.dart';
@@ -25,10 +26,10 @@ class _AllPuzzlesScreenState extends ScreenState<AllPuzzlesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xffdbdbdb),
-        title: Text("Puzzles",style: TextStyle(color: Colors.black),),
+        backgroundColor: AppColors.gray,
+        title: Text("Puzzles",style: TextStyle(color: AppColors.black),),
       ),
       body: BlocConsumer<AllPuzzlesCubit, AllPuzzlesState>(
         builder: (context, state) {

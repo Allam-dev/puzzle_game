@@ -9,6 +9,7 @@ part 'game_state.dart';
 
 class GameCubit extends Cubit<GameState> {
   late Puzzle _puzzle;
+  int _steps = 0;
   UpdatePuzzle updatePuzzle;
 
   GameCubit({required this.updatePuzzle}) : super(GameInitial());
@@ -20,7 +21,8 @@ class GameCubit extends Cubit<GameState> {
         either.fold((l) => GameCrash(), (r) {
           emit(GameLoadBoard());
           emit(GameWin());
-          close();
+
+          // emit(I)
         });
       });
     } else {
@@ -28,10 +30,20 @@ class GameCubit extends Cubit<GameState> {
     }
   }
 
+  void reload() {
+    puzzle.list.shuffle();
+    emit(GameLoadBoard());
+  }
+
   Puzzle get puzzle => _puzzle;
 
   set puzzle(Puzzle puzzle) {
     _puzzle = puzzle;
     _puzzle.createList();
+  }
+
+  int get steps{
+    return _steps;
+    emit(state);
   }
 }

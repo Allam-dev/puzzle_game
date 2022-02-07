@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
 import 'package:hack_puzzle/presentation/screens/game/cubit/game_cubit.dart';
-import 'package:hack_puzzle/presentation/screens/game/ui/widgets/puzzle_square.dart';
+import 'package:hack_puzzle/presentation/screens/game/ui/widgets/game_board_widget.dart';
+import 'package:hack_puzzle/presentation/screens/game/ui/widgets/win_widget.dart';
 import 'package:hack_puzzle/presentation/screens/screen.dart';
 
 class GameScreen extends Screen {
@@ -29,50 +30,28 @@ class _GameScreenState extends ScreenState<GameScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.gray,
-        elevation: 0.0,
-        centerTitle: true,
         title: Text("${gameCubit.puzzle.columns}x${gameCubit.puzzle.rows}"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<GameCubit, GameState>(
-          builder: (context, state) {
-            if (state is GameInitial || state is GameLoadBoard) {
-              return Column(
-                children: [
-                  LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                      return Container(
-                        height: constraints.maxWidth,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.gray,
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        child: GridView.builder(
-                          physics: const ScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: gameCubit.puzzle.rows,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 5),
-                            itemCount: gameCubit.puzzle.list.length,
-                            itemBuilder: (contex, index) {
-                              if (gameCubit.puzzle.list.indexOf(0) == index) {
-                                return const SizedBox.shrink();
-                              } else {
-                                return PuzzleSquare(index: index);
-                              }
-                            }),
-                      );
-                    },
-                  ),
-                ],
-              );
-            } else {
-              return Container();
-            }
-          },
+        child: Column(
+          children: [
+            BlocBuilder<GameCubit, GameState>(
+              builder: (context, state) {
+                if(state is GameLoadBoard || state is GameInitial){
+                  return GameBoardWidget();
+                }else{
+                  return Container();
+                }
+              },
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                gameCubit.reload();
+              },
+              child: const Icon(Icons.replay_outlined),
+            )
+          ],
         ),
       ),
     );

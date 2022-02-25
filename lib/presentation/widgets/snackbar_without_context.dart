@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../main.dart';
+import 'package:hack_puzzle/presentation/app/app.dart';
 
 abstract class SnackBarWithoutContext{
 

@@ -1,8 +1,7 @@
 import 'package:hack_puzzle/core/error/exceptions.dart';
-import 'package:hack_puzzle/core/helpers/database/database_helper.dart';
-import 'package:hack_puzzle/core/helpers/debugging/log.dart';
 import 'package:hack_puzzle/features/puzzle/data/data_sources/local/puzzle_local_data_source.dart';
 import 'package:hack_puzzle/features/puzzle/data/models/puzzle_model.dart';
+import 'package:hack_puzzle/injection.dart';
 import 'package:sqflite/sqflite.dart';
 
 
@@ -11,7 +10,7 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
 
   @override
   Future<bool> isPuzzlesTabelExisting() async {
-    Database database = await DatabaseHelper.database;
+    Database database =  getIt<Database>();
     try {
       await database.query(_tableName);
       return true;
@@ -22,7 +21,7 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
 
   @override
   Future<void> createPuzzleTable() async {
-    Database database = await DatabaseHelper.database;
+    Database database =  getIt<Database>();
     int firstLevel = 3;
     int lastLevel = 15;
     try {
@@ -44,7 +43,7 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
 
   @override
   Future<List<PuzzleModel>> getAllPuzzles() async {
-    Database database = await DatabaseHelper.database;
+    Database database =  getIt<Database>();
     List<PuzzleModel> puzzles = [];
     try {
       List<Map<String, Object?>> query = await database.query(_tableName);
@@ -60,7 +59,7 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
   @override
   Future<void> updatePuzzle(
       {required Map<String, Object?> values, required int id}) async {
-    Database database = await DatabaseHelper.database;
+    Database database =  getIt<Database>();
     try {
       await database
           .update(_tableName, values, where: "id = ?", whereArgs: [id]);

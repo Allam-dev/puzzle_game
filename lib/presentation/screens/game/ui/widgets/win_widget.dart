@@ -1,16 +1,13 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
 import 'package:hack_puzzle/injection.dart';
 import 'package:hack_puzzle/presentation/navigation/app_navigator.dart';
 import 'package:hack_puzzle/presentation/screens/game/cubit/game_cubit.dart';
-import 'package:material_dialogs/material_dialogs.dart';
+import 'package:hack_puzzle/generated/l10n.dart';
 
 class WinWidget extends StatefulWidget {
-  const WinWidget({Key? key}) : super(key: key);
+  WinWidget({Key? key}) : super(key: key);
 
   @override
   State<WinWidget> createState() => _WinWidgetState();
@@ -31,7 +28,8 @@ class _WinWidgetState extends State<WinWidget> {
   Widget build(BuildContext context) {
     gameCubit = getIt<GameCubit>();
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
+        AppNavigator.pop();
         AppNavigator.pop();
         return Future.value(true);
       },
@@ -50,38 +48,86 @@ class _WinWidgetState extends State<WinWidget> {
               ],
             ),
           ),
-          // Dialog(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(10.0),
-          //     child: Column(
-          //       mainAxisSize: MainAxisSize.min,
-          //       children: [
-          //         Text("مبروووووك !"),
-          //         Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //           children: [
-          //             MaterialButton(
-          //               onPressed: () {
-          //                 gameCubit.restart();
-          //                 AppNavigator.pop();
-          //               },
-          //               child: const Text("play agian"),
-          //             ),
-          //             MaterialButton(
-          //               onPressed: () {
-          //                 gameCubit.nextLevel();
-          //                 AppNavigator.pop();
-          //               },
-          //               child: const Text("next level"),
-          //             )
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          
-          
+          Dialog(
+            backgroundColor: AppColors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.white,
+              ),
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    S.of(context).complete,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    const Icon(
+                      Icons.touch_app_outlined,
+                      size: 40,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "${gameCubit.steps}",
+                      style: const TextStyle(fontSize: 20),
+                    )
+                  ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    const Icon(
+                      Icons.timer,
+                      size: 35,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      "${gameCubit.time} ${S.of(context).s}",
+                      style: const TextStyle(fontSize: 20),
+                    )
+                  ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          gameCubit.restart();
+                          AppNavigator.pop();
+                        },
+                        color: AppColors.grey300,
+                        icon: const Icon(Icons.replay),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          gameCubit.nextLevel();
+                          AppNavigator.pop();
+                        },
+                        child: Row(
+                          children: [
+                            Text(S.of(context).next),
+                            // Icon(Icons.next)
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 // ignore_for_file: must_be_immutable
-
+import 'package:hack_puzzle/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
@@ -31,100 +31,101 @@ class _OpenLevelWidget extends StatelessWidget {
     final AllLevelsCubit allPuzzlesCubit =
         BlocProvider.of<AllLevelsCubit>(context);
     return GestureDetector(
-      onTap: () {
-        allPuzzlesCubit.gotoGameScreen(puzzle: puzzle);
+        onTap: () {
+          allPuzzlesCubit.gotoGameScreen(puzzle: puzzle);
+        },
+        child: (puzzle.steps == 0 && puzzle.timeBySec == 0)
+            ? notPlayed()
+            : played());
+  }
+
+  Widget played() {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          height: constraints.maxWidth / 1.5,
+          decoration: BoxDecoration(
+              color: AppColors.white, borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "${puzzle.rows} x ${puzzle.columns}",
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.touch_app_outlined,
+                        size: 40,
+                      ),
+                      Text(
+                        "${puzzle.steps}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 30,
+                    width: 1,
+                    color: AppColors.black,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.timer,
+                        size: 35,
+                      ),
+                      Text(
+                        "${puzzle.timeBySec} ${S.of(context).s}",
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
       },
-      child:(puzzle.steps == 0 && puzzle.timeBySec == 0)?notPlayed():played()
     );
   }
-  Widget played(){
+
+  Widget notPlayed() {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Container(
-            height: constraints.maxWidth / 1.5,
-            decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  "${puzzle.rows} x ${puzzle.columns}",
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          height: constraints.maxWidth / 1.5,
+          decoration: BoxDecoration(
+              color: AppColors.white, borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "${puzzle.rows} x ${puzzle.columns}",
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        const Icon(
-                          Icons.timer,
-                          size: 35,
-                        ),
-                        Text(
-                          "${puzzle.timeBySec} s",
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 30,
-                      width: 1,
-                      color: AppColors.black,
-                    ),
-                    Column(
-                      children: [
-                        const Icon(
-                          Icons.touch_app_outlined,
-                          size: 40,
-                        ),
-                        Text(
-                          "${puzzle.steps}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      );
-  }
-  Widget notPlayed(){
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Container(
-            height: constraints.maxWidth / 1.5,
-            decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  "${puzzle.rows} x ${puzzle.columns}",
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text("Play Now"),
-              ],
-            ),
-          );
-        },
-      );
+              ),
+              Text(S.of(context).play_now),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -139,7 +140,7 @@ class _CloseLevelWidget extends StatelessWidget {
         return Container(
           height: constraints.maxWidth / 1.5,
           decoration: BoxDecoration(
-              color: AppColors.grey, borderRadius: BorderRadius.circular(20)),
+              color: AppColors.grey400, borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -148,12 +149,12 @@ class _CloseLevelWidget extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 30,
-                  fontWeight: FontWeight.bold,  
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Icon(
                 Icons.lock_outline,
-                color: Colors.black,
+                color: AppColors.black,
                 size: 100,
               ),
             ],

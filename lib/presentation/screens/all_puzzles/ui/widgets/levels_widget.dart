@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:hack_puzzle/features/puzzle/domain/entities/puzzle.dart';
@@ -18,7 +18,7 @@ class LevelsWidget extends StatelessWidget {
           return LevelWidget(puzzle: puzzles[index]);
         },
         separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(
+          return const SizedBox(
             height: 15,
           );
         },

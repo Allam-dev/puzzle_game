@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +38,12 @@ class _GameScreenState extends ScreenState<GameScreen> {
         },
         listener: (context, state) {
           if (state is GameWin) {
-            // showDialog(
-            //     barrierDismissible: false,
-            //     context: context,
-            //     builder: (context) {
-            //       return WinWidget();
-            //     });
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return WinWidget();
+                });
 
             // AwesomeDialog(
             //   context: context,
@@ -56,31 +55,31 @@ class _GameScreenState extends ScreenState<GameScreen> {
             //   btnOkOnPress: () {},
             // ).show();
 
-            Dialogs.materialDialog(
-                color: Colors.white,
-                // msg: 'Congratulations, you won 500 points',
-                title: 'Congratulations',
-                barrierDismissible: false,
-                lottieBuilder: Lottie.asset(AnimationPath.get(fileName: "success_batch")),
-                context: context,
-                actions: [
-                  IconsButton(
-                    onPressed: () {},
-                    text: 'Claim',
-                    iconData: Icons.done,
-                    color: Colors.blue,
-                    textStyle: TextStyle(color: Colors.white),
-                    iconColor: Colors.white,
-                  ),
-                  IconsButton(
-                    onPressed: () {},
-                    text: 'Claim',
-                    iconData: Icons.done,
-                    color: Colors.blue,
-                    textStyle: TextStyle(color: Colors.white),
-                    iconColor: Colors.white,
-                  ),
-                ]);
+            // Dialogs.materialDialog(
+            //     color: Colors.white,
+            //     // msg: 'Congratulations, you won 500 points',
+            //     title: 'Congratulations',
+            //     barrierDismissible: false,
+            //     lottieBuilder: Lottie.asset(AnimationPath.get(fileName: "success_batch")),
+            //     context: context,
+            //     actions: [
+            //       IconsButton(
+            //         onPressed: () {},
+            //         text: 'Claim',
+            //         iconData: Icons.done,
+            //         color: Colors.blue,
+            //         textStyle: TextStyle(color: Colors.white),
+            //         iconColor: Colors.white,
+            //       ),
+            //       IconsButton(
+            //         onPressed: () {},
+            //         text: 'Claim',
+            //         iconData: Icons.done,
+            //         color: Colors.blue,
+            //         textStyle: TextStyle(color: Colors.white),
+            //         iconColor: Colors.white,
+            //       ),
+            //     ]);
           }
         },
       ),

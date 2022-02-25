@@ -16,7 +16,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
   get_it: ^7.2.0
+  hive_flutter: ^1.1.0
   logger: ^1.1.0
   material_dialogs: ^1.1.1
   path: ^1.8.0
@@ -34,3 +37,5 @@ flutter:
 
   assets:
     - assets/json/animations/
+flutter_intl:
+  enabled: true

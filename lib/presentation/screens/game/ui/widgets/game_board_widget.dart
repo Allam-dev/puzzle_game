@@ -15,7 +15,7 @@ class GameBoardWidget extends StatelessWidget {
           height: constraints.maxWidth,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: AppColors.purple, borderRadius: BorderRadius.circular(20)),
+              color: AppColors.grey300, borderRadius: BorderRadius.circular(20)),
           child: GridView.builder(
               physics: const ScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

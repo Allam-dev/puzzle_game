@@ -1,7 +1,7 @@
 import 'dart:math';
 
 extension Play on List<int> {
-  void play(int index) {
+  void play({required int index, required Function afterPlay}) {
     int rows = sqrt(length).toInt();
     if (indexOf(0) > index) {
       int result = indexOf(0) - index;
@@ -12,6 +12,7 @@ extension Play on List<int> {
           this[indexOf(0)] = this[decrementer];
           this[decrementer] = 0;
         }
+        afterPlay();
       }
       // horizontal
       else if (indexOf(0) ~/ rows == index ~/ rows) {
@@ -20,6 +21,7 @@ extension Play on List<int> {
           this[indexOf(0)] = this[decrementer];
           this[decrementer] = 0;
         }
+        afterPlay();
       }
     } else if (index > indexOf(0)) {
       int result = index - indexOf(0);
@@ -30,6 +32,7 @@ extension Play on List<int> {
           this[indexOf(0)] = this[incrementer];
           this[incrementer] = 0;
         }
+        afterPlay();
       }
       // horizontal
       else if (indexOf(0) ~/ rows == index ~/ rows) {
@@ -38,6 +41,7 @@ extension Play on List<int> {
           this[indexOf(0)] = this[incrementer];
           this[incrementer] = 0;
         }
+        afterPlay();
       }
     }
   }

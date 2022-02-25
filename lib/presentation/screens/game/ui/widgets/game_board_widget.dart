@@ -15,7 +15,7 @@ class GameBoardWidget extends StatelessWidget {
           height: constraints.maxWidth,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: AppColors.gray, borderRadius: BorderRadius.circular(20)),
+              color: AppColors.purple, borderRadius: BorderRadius.circular(20)),
           child: GridView.builder(
               physics: const ScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -44,13 +44,16 @@ class _PuzzleSquare extends StatelessWidget {
   Widget build(BuildContext context) {
     final GameCubit gameCubit = BlocProvider.of<GameCubit>(context);
     return GestureDetector(
-      onTap: () {
-        gameCubit.play(index);
+      onTap: () async {
+        await gameCubit.play(index);
       },
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return Container(
-            color: AppColors.white,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(constraints.minWidth/4),
+              color: AppColors.white,
+            ),
             child: Center(
               child: Text(
                 "${gameCubit.puzzle.list[index]}",

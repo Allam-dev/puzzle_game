@@ -1,8 +1,10 @@
 import 'package:hack_puzzle/core/error/exceptions.dart';
 import 'package:hack_puzzle/core/helpers/database/database_helper.dart';
+import 'package:hack_puzzle/core/helpers/debugging/log.dart';
 import 'package:hack_puzzle/features/puzzle/data/data_sources/local/puzzle_local_data_source.dart';
 import 'package:hack_puzzle/features/puzzle/data/models/puzzle_model.dart';
 import 'package:sqflite/sqflite.dart';
+
 
 class PuzzleDatabseSource implements PuzzleLocalDataSource {
   final String _tableName = "hack_puzzles";
@@ -21,8 +23,8 @@ class PuzzleDatabseSource implements PuzzleLocalDataSource {
   @override
   Future<void> createPuzzleTable() async {
     Database database = await DatabaseHelper.database;
-    int firstLevel = 2;
-    int lastLevel = 16;
+    int firstLevel = 3;
+    int lastLevel = 15;
     try {
       await database.execute(
           "CREATE TABLE $_tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, rows INTEGER, columns INTEGER, steps INTEGER, time_by_sec INTEGER, size INTEGER, is_open INTEGER)");

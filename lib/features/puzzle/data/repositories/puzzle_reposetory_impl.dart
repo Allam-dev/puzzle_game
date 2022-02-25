@@ -6,6 +6,7 @@ import 'package:hack_puzzle/features/puzzle/domain/entities/puzzle.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hack_puzzle/features/puzzle/domain/repositories/puzzle_repository.dart';
 
+
 class PuzzleReposetoryImpl implements PuzzleRepository {
   final PuzzleLocalDataSource localDataSource;
 

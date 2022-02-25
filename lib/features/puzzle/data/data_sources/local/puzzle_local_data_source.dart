@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-import 'package:hack_puzzle/core/error/failures.dart';
 import 'package:hack_puzzle/features/puzzle/data/models/puzzle_model.dart';
 
 abstract class PuzzleLocalDataSource {

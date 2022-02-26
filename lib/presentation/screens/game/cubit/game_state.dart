@@ -7,6 +7,8 @@ class GameInitial extends GameState {}
 
 class GameWin extends GameState {}
 
+class GameFinishAll extends GameState {}
+
 class GameLoad extends GameState {}
 
 class GameCrash extends GameState {}

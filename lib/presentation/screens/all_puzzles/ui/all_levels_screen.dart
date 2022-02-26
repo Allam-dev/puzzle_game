@@ -38,15 +38,13 @@ class _AllPuzzlesScreenState extends ScreenState<AllLevelsScreen> {
                   itemBuilder: (context) => List.generate(
                       S.delegate.supportedLocales.length,
                       (index) => PopupMenuItem(
-                              child: GestureDetector(
-                            onTap: () async {
-                              BlocProvider.of<AllLevelsCubit>(context)
-                                  .setLanguage(Locale(S.delegate
-                                      .supportedLocales[index].languageCode));
-                            },
-                            child: Text(S
-                                .delegate.supportedLocales[index].languageCode),
-                          ))))
+                          onTap: () async {
+                            BlocProvider.of<AllLevelsCubit>(context)
+                                .setLanguage(Locale(S.delegate
+                                    .supportedLocales[index].languageCode));
+                          },
+                          child: Text(S
+                              .delegate.supportedLocales[index].languageCode))))
             ],
           ),
           body: BlocConsumer<AllLevelsCubit, AllLevelsState>(

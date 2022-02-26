@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `complete!`
+  /// `complete !`
   String get complete {
     return Intl.message(
-      'complete!',
+      'complete !',
       name: 'complete',
       desc: '',
       args: [],
@@ -95,6 +95,26 @@ class S {
     return Intl.message(
       'next',
       name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `finished !!`
+  String get finished {
+    return Intl.message(
+      'finished !!',
+      name: 'finished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ok`
+  String get ok {
+    return Intl.message(
+      'ok',
+      name: 'ok',
       desc: '',
       args: [],
     );

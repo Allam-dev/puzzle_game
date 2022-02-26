@@ -17,6 +17,7 @@ class LevelWidget extends StatelessWidget {
         puzzle: puzzle,
       );
     } else {
+      
       return _CloseLevelWidget(puzzle: puzzle);
     }
   }

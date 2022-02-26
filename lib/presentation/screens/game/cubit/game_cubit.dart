@@ -53,8 +53,13 @@ class GameCubit extends Cubit<GameState> {
                   either.fold((l) => emit(GameCrash()), (r) async {
                     _stopWatchTimer?.onExecute.add(StopWatchExecute.stop);
                     await getIt<AllLevelsCubit>().getPuzzles();
-                    emit(GameLoad());
-                    emit(GameWin());
+                    if (_nextPuzzle.rows <= 15) {
+                      emit(GameLoad());
+                      emit(GameWin());
+                    } else {
+                      emit(GameLoad());
+                      emit(GameFinishAll());
+                    }
                   });
                 });
               });
@@ -65,10 +70,14 @@ class GameCubit extends Cubit<GameState> {
         });
   }
 
-  void nextLevel(){
-    _puzzle = _nextPuzzle;
-    _puzzle.createList();
-    restart();
+  void nextLevel() {
+    if (_nextPuzzle.rows <= 15) {
+      _puzzle = _nextPuzzle;
+      _puzzle.createList();
+      restart();
+    } else {
+      emit(GameFinishAll());
+    }
   }
 
   void restart() {

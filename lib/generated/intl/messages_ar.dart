@@ -22,8 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "complete": MessageLookupByLibrary.simpleMessage("اكتمل!"),
+        "complete": MessageLookupByLibrary.simpleMessage("اكتمل !"),
+        "finished":
+            MessageLookupByLibrary.simpleMessage("اكملت جميع المراحل !!"),
         "next": MessageLookupByLibrary.simpleMessage("التالى"),
+        "ok": MessageLookupByLibrary.simpleMessage("تم"),
         "play_now": MessageLookupByLibrary.simpleMessage("العب الان"),
         "puzzles": MessageLookupByLibrary.simpleMessage("الغاز"),
         "s": MessageLookupByLibrary.simpleMessage("ث")

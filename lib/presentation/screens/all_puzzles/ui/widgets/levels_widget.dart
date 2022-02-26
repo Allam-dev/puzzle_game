@@ -13,6 +13,7 @@ class LevelsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: ListView.separated(
+        physics: const ScrollPhysics(),
         itemCount: puzzles.length,
         itemBuilder: (context, index) {
           return LevelWidget(puzzle: puzzles[index]);

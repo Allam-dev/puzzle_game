@@ -6,14 +6,14 @@ import 'package:hack_puzzle/presentation/navigation/app_navigator.dart';
 import 'package:hack_puzzle/presentation/screens/game/cubit/game_cubit.dart';
 import 'package:hack_puzzle/generated/l10n.dart';
 
-class WinDialog extends StatefulWidget {
-  WinDialog({Key? key}) : super(key: key);
+class FinishGameDialog extends StatefulWidget {
+  FinishGameDialog({Key? key}) : super(key: key);
 
   @override
-  State<WinDialog> createState() => _WinDialogState();
+  State<FinishGameDialog> createState() => _FinishGameDialogState();
 }
 
-class _WinDialogState extends State<WinDialog> {
+class _FinishGameDialogState extends State<FinishGameDialog> {
   late final GameCubit gameCubit;
   late ConfettiController confettiController;
   @override
@@ -61,7 +61,7 @@ class _WinDialogState extends State<WinDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    S.of(context).complete,
+                    S.of(context).finished,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
@@ -102,69 +102,15 @@ class _WinDialogState extends State<WinDialog> {
                   Row(
                     children: [
                       Expanded(
-                        flex: 2,
-                        child: GestureDetector(onTap: () {
-                          AppNavigator.pop();
-                          AppNavigator.pop();
-                        }, child: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints constraints) {
-                            return Container(
-                                height: constraints.maxWidth,
-                                decoration: BoxDecoration(
-                                    color: AppColors.grey300,
-                                    borderRadius: BorderRadius.circular(1000)),
-                                child: const Icon(Icons.home));
-                          },
-                        )),
-                      ),
-                      const Expanded(
-                          child: SizedBox(
-                        width: double.infinity,
-                      )),
-                      Expanded(
-                        flex: 2,
-                        child: GestureDetector(onTap: () {
-                          gameCubit.restart();
-                          AppNavigator.pop();
-                        }, child: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints constraints) {
-                            return Container(
-                                height: constraints.maxWidth,
-                                decoration: BoxDecoration(
-                                    color: AppColors.grey300,
-                                    borderRadius: BorderRadius.circular(1000)),
-                                child: const Icon(Icons.replay));
-                          },
-                        )),
-                      ),
-                      const Expanded(
-                          child: SizedBox(
-                        width: double.infinity,
-                      )),
-                      Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                          onTap: () {
-                            gameCubit.nextLevel();
+                        child: MaterialButton(
+                          onPressed: () {
+                            AppNavigator.pop();
                             AppNavigator.pop();
                           },
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                color: AppColors.amber,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(S.of(context).next),
-                                const Icon(Icons.arrow_forward)
-                              ],
-                            ),
-                          ),
+                          color: AppColors.amber,
+                          child: Text(S.of(context).ok),
                         ),
-                      )
+                      ),
                     ],
                   )
                 ],

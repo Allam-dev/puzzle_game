@@ -2,6 +2,8 @@
     "puzzles":"puzzles",
     "s":"s",
     "play_now":"play now",
-    "complete":"complete!",
-    "next":"next"
+    "complete":"complete !",
+    "next":"next",
+    "finished":"finished !!",
+    "ok":"ok"
 }

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
@@ -60,9 +61,30 @@ class _WinDialogState extends State<WinDialog> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    S.of(context).complete,
-                    style: const TextStyle(fontSize: 25),
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      height: 50,
+                      child: DefaultTextStyle(
+                        style: TextStyle(
+                          fontSize: 35,
+                          color: AppColors.amber,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 7.0,
+                              color: AppColors.amber,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
+                        ),
+                        child: AnimatedTextKit(
+                          repeatForever: true,
+                          animatedTexts: [
+                            FlickerAnimatedText(S.of(context).complete),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,

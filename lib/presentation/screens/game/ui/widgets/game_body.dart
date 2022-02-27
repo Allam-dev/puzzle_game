@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hack_puzzle/core/helpers/constants/app_colors.dart';
@@ -26,11 +25,6 @@ class _GameBodyState extends State<GameBody> {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        floatingActionButton:FloatingActionButton(
-          onPressed:(){
-            gameCubit.emit(GameWin());
-          }
-        ) ,
         backgroundColor: AppColors.white,
         appBar: AppBar(
           centerTitle: true,

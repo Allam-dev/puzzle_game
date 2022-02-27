@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:hack_puzzle/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,6 @@ class LevelWidget extends StatelessWidget {
         puzzle: puzzle,
       );
     } else {
-      
       return _CloseLevelWidget(puzzle: puzzle);
     }
   }
@@ -121,7 +121,25 @@ class _OpenLevelWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(S.of(context).play_now),
+              DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: 30,
+                  color: AppColors.amber,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 7.0,
+                      color: AppColors.amber,
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    FlickerAnimatedText(S.of(context).play_now),
+                  ],
+                ),
+              ),
             ],
           ),
         );
@@ -141,7 +159,8 @@ class _CloseLevelWidget extends StatelessWidget {
         return Container(
           height: constraints.maxWidth / 1.5,
           decoration: BoxDecoration(
-              color: AppColors.grey400, borderRadius: BorderRadius.circular(20)),
+              color: AppColors.grey400,
+              borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
